@@ -203,13 +203,13 @@ namespace EditorTXT
             else
             {
                 string temp = "";
-                for(int i = 0;i < txtConteudo.Text.Length;i++)
+                for (int i = 0; i < txtConteudo.Text.Length; i++)
                 {
-                    if(i == txtConteudo.SelectionStart)
+                    if (i == txtConteudo.SelectionStart)
                     {
                         temp += dataHora;
                         temp += txtConteudo.Text[i];
-                        
+
                     }
                     else
                     {
@@ -223,5 +223,87 @@ namespace EditorTXT
         }
 
         #endregion
+
+        #region Menu Formatar
+
+        private void mFormatarQuebra_Click(object sender, EventArgs e)
+        {
+            //mFormatarQuebra.CheckOnClick = true;
+            //txtConteudo.WordWrap = true;
+            txtConteudo.WordWrap = mFormatarQuebra.Checked;
+        }
+
+        private void mFormatarFonte_Click(object sender, EventArgs e)
+        {
+            FontDialog fonte = new FontDialog();
+            fonte.ShowColor = true;
+            fonte.ShowEffects = true;
+
+            fonte.Font = txtConteudo.Font;
+            fonte.Color = txtConteudo.ForeColor;
+
+            DialogResult result = fonte.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                txtConteudo.Font = fonte.Font;
+                txtConteudo.ForeColor = fonte.Color;
+            }
+        }
+
+        #endregion
+
+        #region Menu Exibir
+
+        private void mZoomAmpliar_Click(object sender, EventArgs e)
+        {
+            txtConteudo.ZoomFactor += 0.1f;
+            //statusBarLabel.Text = (txtConteudo.ZoomFactor  * 100).ToString("N0") + " %";
+            AtualizarZoomStatusBar(txtConteudo.ZoomFactor);
+        }
+
+        private void mZoomReduzir_Click(object sender, EventArgs e)
+        {
+            txtConteudo.ZoomFactor -= 0.1f;
+            //statusBarLabel.Text = (txtConteudo.ZoomFactor * 100).ToString("N0") + " %";
+            AtualizarZoomStatusBar(txtConteudo.ZoomFactor);
+        }
+
+        private void mZoomRestaurar_Click(object sender, EventArgs e)
+        {
+            txtConteudo.ZoomFactor = 1f;
+            //statusBarLabel.Text = (txtConteudo.ZoomFactor * 100).ToString("N0") + " %";
+            AtualizarZoomStatusBar(txtConteudo.ZoomFactor);
+        }
+
+        private void mExibirBarraStatus_Click(object sender, EventArgs e)
+        {
+            statusBar.Visible = mExibirBarraStatus.Checked;
+        }
+
+        private void AtualizarZoomStatusBar(float zoom)
+        {
+            statusBarLabel.Text = $"{Math.Round(zoom * 100)} %";
+        }
+
+        #endregion
+
+        #region Menu Ajuda
+
+        private void mAjudarExibirAjuda_Click(object sender, EventArgs e)
+        {
+            FormAjuda f = new FormAjuda();
+            f.Show();
+        }
+
+        private void mAjudarSobre_Click(object sender, EventArgs e)
+        {
+            FormSobre f = new FormSobre();  
+            f.Show();
+        }
+
+        #endregion
+
+
     }
 }
