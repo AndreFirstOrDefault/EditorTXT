@@ -20,8 +20,7 @@ namespace EditorTXT
         private void mArquivoNovaJanela_Click(object sender, EventArgs e)
         {
             //Form1 f = new Form1();
-            //f.Show();
-
+            //f.Show()
             Thread t = new Thread(() => Application.Run(new Form1()));
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
@@ -264,9 +263,16 @@ namespace EditorTXT
 
         private void mZoomReduzir_Click(object sender, EventArgs e)
         {
-            txtConteudo.ZoomFactor -= 0.1f;
-            //statusBarLabel.Text = (txtConteudo.ZoomFactor * 100).ToString("N0") + " %";
-            AtualizarZoomStatusBar(txtConteudo.ZoomFactor);
+            if(txtConteudo.ZoomFactor >= 1)
+            {
+                txtConteudo.ZoomFactor -= 0.1f;
+                //statusBarLabel.Text = (txtConteudo.ZoomFactor * 100).ToString("N0") + " %";
+                AtualizarZoomStatusBar(txtConteudo.ZoomFactor);
+            }
+            else
+            {
+                MessageBox.Show("Ops não é possivel reduzir mais","Erro",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            }
         }
 
         private void mZoomRestaurar_Click(object sender, EventArgs e)
@@ -298,12 +304,16 @@ namespace EditorTXT
 
         private void mAjudarSobre_Click(object sender, EventArgs e)
         {
-            FormSobre f = new FormSobre();  
+            FormSobre f = new FormSobre();
             f.Show();
         }
 
         #endregion
 
-
+        // Barra ferramentas novo, modo menos eficiente
+        private void toolStripButtonNovo_Click(object sender, EventArgs e)
+        {
+            mArquivoNovo_Click(sender, e);
+        }
     }
 }

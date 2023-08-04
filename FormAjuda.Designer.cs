@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAjuda));
             webBrowser = new WebBrowser();
             SuspendLayout();
             // 
@@ -45,6 +46,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(803, 455);
             Controls.Add(webBrowser);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormAjuda";
             Text = "Ajuda do Editor TXT";
             ResumeLayout(false);
